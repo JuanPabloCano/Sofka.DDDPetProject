@@ -16,10 +16,6 @@ public class Symptoms implements ValueObject<Set<String>> {
         }
     }
 
-    public void addSymptoms(String symptom){
-        symptoms.add(symptom);
-    }
-
     @Override
     public Set<String> value() {
         return symptoms;

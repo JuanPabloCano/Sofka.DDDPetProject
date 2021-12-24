@@ -10,6 +10,7 @@ import java.util.Set;
 
 public class User extends Entity<UserID> {
 
+    protected UserID userID;
     protected PersonalData personalData;
     protected Set<Symptoms> symptoms;
 
@@ -28,8 +29,13 @@ public class User extends Entity<UserID> {
         this.personalData = personalData;
     }
 
-    public void addSymptoms(Set<Symptoms> symptoms){
-        this.symptoms = symptoms;
+    public void addSymptoms(Symptoms symptom){
+        if (this.symptoms.isEmpty()){
+            symptoms.add(symptom);
+        }
+        if (this.symptoms.contains(symptom)){
+            throw new IllegalArgumentException("El síntoma ya se encuentra en la lista");
+        }
     }
 
     public PersonalData personalData() {
@@ -38,5 +44,9 @@ public class User extends Entity<UserID> {
 
     public Set<Symptoms> symptoms() {
         return symptoms;
+    }
+
+    public UserID userID() {
+        return userID;
     }
 }

@@ -1,7 +1,10 @@
 package co.com.sofka.domain.doctorUserInterview;
 
 import co.com.sofka.domain.doctorUserInterview.events.*;
+import co.com.sofka.domain.doctorUserInterview.values.Symptoms;
 import co.com.sofka.domain.generic.EventChange;
+import co.com.sofka.generics.BusinessHoursAdded;
+import co.com.sofka.domain.doctorUserInterview.events.RoomAdded;
 
 public class DoctorUserInterviewChange extends EventChange {
 
@@ -16,9 +19,9 @@ public class DoctorUserInterviewChange extends EventChange {
         });
 
         apply((DoctorAdded event) -> {
-            doctorUserInterview.doctor = event.getDoctorID();
-            doctorUserInterview.doctor = event.getPersonalData();
-            doctorUserInterview.doctor = event.getDescription();
+            doctorUserInterview.doctor.doctorID = event.getDoctorID();
+            doctorUserInterview.doctor.personalData = event.getPersonalData();
+            doctorUserInterview.doctor.description = event.getDescription();
         });
 
         apply((DoctorUpdated event) -> {
@@ -28,9 +31,10 @@ public class DoctorUserInterviewChange extends EventChange {
         });
 
         apply((UserAdded event) -> {
-            doctorUserInterview.user = event.getUserId();
-            doctorUserInterview.user = event.getPersonalData();
-            doctorUserInterview.user = event.getSymptoms();
+            doctorUserInterview.user.userID = event.getUserId();
+            assert false;
+            doctorUserInterview.user.personalData = event.getPersonalData();
+            doctorUserInterview.user.symptoms.forEach(Symptoms::value);
         });
 
         apply((UserUpdated event) -> {
@@ -39,16 +43,10 @@ public class DoctorUserInterviewChange extends EventChange {
             user.updatePersonalData(event.getPersonalData());
         });
 
-        apply((RoomAdded event) -> {
-            doctorUserInterview.room = event.getRoom();
-        });
+        apply((RoomAdded event) -> doctorUserInterview.room = event.getRoom());
 
-        apply((DateAdded event) -> {
-            doctorUserInterview.dateSchedule = event.getDateSchedule();
-        });
+        apply((DateAdded event) -> doctorUserInterview.dateSchedule = event.getDateSchedule());
 
-        apply((BusinessHoursAdded event) -> {
-            doctorUserInterview.businessHours = event.getBusinessHours();
-        });
+        apply((BusinessHoursAdded event) -> doctorUserInterview.businessHours = event.getBusinessHours());
     }
 }

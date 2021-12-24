@@ -4,9 +4,7 @@ import co.com.sofka.domain.doctorUserInterview.events.*;
 import co.com.sofka.domain.doctorUserInterview.values.*;
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofka.generics.BusinessHours;
-import co.com.sofka.generics.Description;
-import co.com.sofka.generics.PersonalData;
+import co.com.sofka.generics.*;
 
 import java.util.List;
 import java.util.Objects;

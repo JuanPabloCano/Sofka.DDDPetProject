@@ -9,6 +9,7 @@ import java.util.Objects;
 
 public class Doctor extends Entity<DoctorID> {
 
+    protected DoctorID doctorID;
     protected PersonalData personalData;
     protected Description description;
 
@@ -36,5 +37,9 @@ public class Doctor extends Entity<DoctorID> {
 
     public Description description() {
         return description;
+    }
+
+    public DoctorID doctorID() {
+        return doctorID;
     }
 }
