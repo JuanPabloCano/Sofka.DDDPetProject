@@ -32,7 +32,7 @@ public class Patient extends Entity<PatientID> {
         this.personalData = personalData;
     }
 
-    public void AddConsciousness(Consciousness consciousness, Integer score){
+    public void addConsciousness(Consciousness consciousness, Integer score){
         if (!this.consciousness.isEmpty()){
             throw new IllegalArgumentException("Ya existe un estado de consciencia");
         }

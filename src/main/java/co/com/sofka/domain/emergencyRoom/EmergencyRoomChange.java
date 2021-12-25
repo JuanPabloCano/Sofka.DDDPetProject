@@ -2,6 +2,7 @@ package co.com.sofka.domain.emergencyRoom;
 
 import co.com.sofka.domain.emergencyRoom.events.*;
 import co.com.sofka.domain.generic.EventChange;
+import co.com.sofka.generics.BusinessHoursAdded;
 
 public class EmergencyRoomChange extends EventChange {
 
@@ -17,7 +18,6 @@ public class EmergencyRoomChange extends EventChange {
         apply((AccidentAdded event) -> emergencyRoom.accident = event.getAccident());
 
         apply((PatientAdded event) -> {
-            emergencyRoom.patient.patientID = event.getPatientID();
             emergencyRoom.patient.personalData = event.getPersonalData();
             emergencyRoom.patient.consciousness = event.getConsciousness();
             emergencyRoom.patient.wounds = event.getWounds();
@@ -42,5 +42,8 @@ public class EmergencyRoomChange extends EventChange {
                     .orElseThrow(() -> new IllegalArgumentException("El ID del especialista no fue encontrado"));
             specialist.updatePersonalData(event.getPersonalData());
         });
+
+        apply((BusinessHoursAdded event) -> emergencyRoom.businessHours = event.getBusinessHours());
+
     }
 }
