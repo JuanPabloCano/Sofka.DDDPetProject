@@ -74,7 +74,7 @@ public class DoctorUserInterview extends AggregateEvent<DoctorUserInterviewID> {
         appendChange(new DateAdded(dateSchedule));
     }
 
-    public void businessHoursAdded(BusinessHours businessHours){
+    public void addBusinessHours(BusinessHours businessHours){
         Objects.requireNonNull(businessHours);
         appendChange(new BusinessHoursAdded(businessHours));
     }
