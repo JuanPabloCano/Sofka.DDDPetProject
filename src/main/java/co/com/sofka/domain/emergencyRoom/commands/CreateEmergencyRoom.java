@@ -1,12 +1,12 @@
-package co.com.sofka.domain.emergencyRoom.events;
+package co.com.sofka.domain.emergencyRoom.commands;
 
 import co.com.sofka.domain.emergencyRoom.values.*;
-import co.com.sofka.domain.generic.DomainEvent;
+import co.com.sofka.domain.generic.Command;
 import co.com.sofka.generics.BusinessHours;
 
 import java.util.Objects;
 
-public class EmergencyRoomCreated extends DomainEvent {
+public class CreateEmergencyRoom extends Command {
 
     private final EmergencyRoomID emergencyRoomID;
     private final SpecialistID specialistID;
@@ -15,8 +15,7 @@ public class EmergencyRoomCreated extends DomainEvent {
     private final Rooms rooms;
     private final BusinessHours businessHours;
 
-    public EmergencyRoomCreated(EmergencyRoomID emergencyRoomID, SpecialistID specialistID, PatientID patientID, AccidentID accidentID, Rooms rooms, BusinessHours businessHours) {
-        super("sofka.emergencyroom.emergencyroomcreated");
+    public CreateEmergencyRoom(EmergencyRoomID emergencyRoomID, SpecialistID specialistID, PatientID patientID, AccidentID accidentID, Rooms rooms, BusinessHours businessHours) {
         this.emergencyRoomID = Objects.requireNonNull(emergencyRoomID);
         this.specialistID = Objects.requireNonNull(specialistID);
         this.patientID = Objects.requireNonNull(patientID);

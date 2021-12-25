@@ -1,10 +1,6 @@
 package co.com.sofka.domain.doctorUserInterview.commands;
 
-import co.com.sofka.domain.doctorUserInterview.Doctor;
-import co.com.sofka.domain.doctorUserInterview.Room;
-import co.com.sofka.domain.doctorUserInterview.User;
-import co.com.sofka.domain.doctorUserInterview.values.DateSchedule;
-import co.com.sofka.domain.doctorUserInterview.values.DoctorUserInterviewID;
+import co.com.sofka.domain.doctorUserInterview.values.*;
 import co.com.sofka.domain.generic.Command;
 import co.com.sofka.generics.BusinessHours;
 
@@ -13,17 +9,17 @@ import java.util.Objects;
 public class CreateDoctorUserInterview extends Command {
 
     private final DoctorUserInterviewID doctorUserInterviewID;
-    private final Doctor doctor;
-    private final User user;
-    private final Room room;
+    private final DoctorID doctorID;
+    private final UserID userID;
+    private final RoomID roomID;
     private final DateSchedule dateSchedule;
     private final BusinessHours businessHours;
 
-    public CreateDoctorUserInterview(DoctorUserInterviewID doctorUserInterviewID, Doctor doctor, User user, Room room, DateSchedule dateSchedule, BusinessHours businessHours) {
+    public CreateDoctorUserInterview(DoctorUserInterviewID doctorUserInterviewID, DoctorID doctorID, UserID userID, RoomID roomID, DateSchedule dateSchedule, BusinessHours businessHours) {
         this.doctorUserInterviewID = Objects.requireNonNull(doctorUserInterviewID);
-        this.doctor = Objects.requireNonNull(doctor);
-        this.user = Objects.requireNonNull(user);
-        this.room = Objects.requireNonNull(room);
+        this.doctorID = Objects.requireNonNull(doctorID);
+        this.userID = Objects.requireNonNull(userID);
+        this.roomID = Objects.requireNonNull(roomID);
         this.dateSchedule = Objects.requireNonNull(dateSchedule);
         this.businessHours = Objects.requireNonNull(businessHours);
     }
@@ -32,16 +28,16 @@ public class CreateDoctorUserInterview extends Command {
         return doctorUserInterviewID;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public DoctorID getDoctor() {
+        return doctorID;
     }
 
-    public User getUser() {
-        return user;
+    public UserID getUser() {
+        return userID;
     }
 
-    public Room getRoom() {
-        return room;
+    public RoomID getRoom() {
+        return roomID;
     }
 
     public DateSchedule getDateSchedule() {

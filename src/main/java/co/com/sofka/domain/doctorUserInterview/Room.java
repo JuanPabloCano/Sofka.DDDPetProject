@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class Room extends Entity<RoomID> {
 
+    protected RoomID roomID;
     protected Area area;
 
 
@@ -26,5 +27,9 @@ public class Room extends Entity<RoomID> {
 
     public Area area() {
         return area;
+    }
+
+    public RoomID roomID() {
+        return roomID;
     }
 }

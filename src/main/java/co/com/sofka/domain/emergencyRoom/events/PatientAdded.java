@@ -13,10 +13,11 @@ public class PatientAdded extends DomainEvent {
 
     private final PatientID patientID;
     private final PersonalData personalData;
-    private final Map<Consciousness, Integer> consciousness;
-    private final Map<Wounds, String> wounds;
+    private final Consciousness consciousness;
+    private final Wounds wounds;
 
-    public PatientAdded(PatientID patientID, PersonalData personalData, Map<Consciousness, Integer> consciousness, Map<Wounds, String> wounds) {
+    public PatientAdded(PatientID patientID, PersonalData personalData, Consciousness consciousness, Wounds
+            wounds) {
         super("sofka.emergencyroom.patientadded");
         this.patientID = Objects.requireNonNull(patientID);
         this.personalData = Objects.requireNonNull(personalData);
@@ -32,11 +33,11 @@ public class PatientAdded extends DomainEvent {
         return personalData;
     }
 
-    public Map<Consciousness, Integer> getConsciousness() {
+    public  Consciousness getConsciousness() {
         return consciousness;
     }
 
-    public Map<Wounds, String> getWounds() {
+    public Wounds getWounds() {
         return wounds;
     }
 }

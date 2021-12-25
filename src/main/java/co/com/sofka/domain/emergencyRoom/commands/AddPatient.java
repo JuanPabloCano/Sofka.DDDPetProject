@@ -5,18 +5,16 @@ import co.com.sofka.domain.emergencyRoom.values.PatientID;
 import co.com.sofka.domain.emergencyRoom.values.Wounds;
 import co.com.sofka.domain.generic.Command;
 import co.com.sofka.generics.PersonalData;
-
-import java.util.Map;
 import java.util.Objects;
 
 public class AddPatient extends Command {
 
     private final PatientID patientID;
     private final PersonalData personalData;
-    private final Map<Consciousness, Integer> consciousness;
-    private final Map<Wounds, String> wounds;
+    private final Consciousness consciousness;
+    private final Wounds wounds;
 
-    public AddPatient(PatientID patientID, PersonalData personalData, Map<Consciousness, Integer> consciousness, Map<Wounds, String> wounds) {
+    public AddPatient(PatientID patientID, PersonalData personalData, Consciousness consciousness, Wounds wounds) {
         this.patientID = Objects.requireNonNull(patientID);
         this.personalData = Objects.requireNonNull(personalData);
         this.consciousness = Objects.requireNonNull(consciousness);
@@ -31,11 +29,11 @@ public class AddPatient extends Command {
         return personalData;
     }
 
-    public Map<Consciousness, Integer> getConsciousness() {
+    public Consciousness getConsciousness() {
         return consciousness;
     }
 
-    public Map<Wounds, String> getWounds() {
+    public Wounds getWounds() {
         return wounds;
     }
 }

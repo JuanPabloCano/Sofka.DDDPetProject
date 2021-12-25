@@ -1,20 +1,27 @@
 package co.com.sofka.domain.doctorUserInterview.events;
 
-import co.com.sofka.domain.doctorUserInterview.Room;
+import co.com.sofka.domain.doctorUserInterview.values.Area;
+import co.com.sofka.domain.doctorUserInterview.values.RoomID;
 import co.com.sofka.domain.generic.DomainEvent;
 
 import java.util.Objects;
 
 public class RoomAdded extends DomainEvent {
 
-    private final Room room;
+    private final RoomID roomID;
+    private final Area area;
 
-    public RoomAdded(Room room) {
+    public RoomAdded(RoomID roomID, Area area) {
         super("sofka.doctoruserinterview.roomadded");
-        this.room = Objects.requireNonNull(room);
+        this.roomID = Objects.requireNonNull(roomID);
+        this.area = Objects.requireNonNull(area);
     }
 
-    public Room getRoom() {
-        return room;
+    public RoomID getRoomID() {
+        return roomID;
+    }
+
+    public Area getArea() {
+        return area;
     }
 }

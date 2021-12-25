@@ -9,7 +9,7 @@ public class DoctorUserInterviewID extends Identity {
     }
     public DoctorUserInterviewID() {}
 
-    public DoctorUserInterviewID of(String uuid){
+    public static DoctorUserInterviewID of(String uuid){
         return new DoctorUserInterviewID(uuid);
     }
 }

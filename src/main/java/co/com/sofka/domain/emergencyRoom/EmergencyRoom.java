@@ -6,6 +6,7 @@ import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofka.generics.BusinessHours;
 import co.com.sofka.generics.BusinessHoursAdded;
+import co.com.sofka.generics.Description;
 import co.com.sofka.generics.PersonalData;
 
 import java.util.*;
@@ -26,10 +27,11 @@ public class EmergencyRoom extends AggregateEvent<EmergencyRoomID> {
         subscribe(new EmergencyRoomChange(this));
     }
 
-    public EmergencyRoom(EmergencyRoomID emergencyRoomID, Specialist specialist, Patient patient, Accident accident,
+    public EmergencyRoom(EmergencyRoomID emergencyRoomID, SpecialistID specialistID, PatientID patientID,
+                         AccidentID accidentID,
                          Rooms rooms, BusinessHours businessHours) {
         super(emergencyRoomID);
-        appendChange(new EmergencyRoomCreated(emergencyRoomID, specialist, patient, accident, rooms, businessHours)).apply();
+        appendChange(new EmergencyRoomCreated(emergencyRoomID, specialistID, patientID, accidentID, rooms, businessHours)).apply();
     }
 
     public static EmergencyRoom from(EmergencyRoomID emergencyRoomID, List<DomainEvent> events){
@@ -51,8 +53,8 @@ public class EmergencyRoom extends AggregateEvent<EmergencyRoomID> {
         appendChange(new SpecialistUpdated(specialistID, personalData)).apply();
     }
 
-    public void addPatient(PatientID patientID, PersonalData personalData, Map<Consciousness, Integer> consciousness,
-                           Map<Wounds, String> wounds){
+    public void addPatient(PatientID patientID, PersonalData personalData, Consciousness consciousness,
+                           Wounds wounds){
         Objects.requireNonNull(patientID);
         Objects.requireNonNull(personalData);
         Objects.requireNonNull(consciousness);
@@ -66,19 +68,23 @@ public class EmergencyRoom extends AggregateEvent<EmergencyRoomID> {
         appendChange(new PatientUpdated(patientID, personalData)).apply();
     }
 
-    public void addAccident(Accident accident){
-        Objects.requireNonNull(accident);
-        appendChange(new AccidentAdded(accident)).apply();
+    public void addAccident(AccidentID accidentID, Place place, TimeOfAccident timeOfAccident,
+                            Description description){
+        Objects.requireNonNull(accidentID);
+        Objects.requireNonNull(place);
+        Objects.requireNonNull(timeOfAccident);
+        Objects.requireNonNull(description);
+        appendChange(new AccidentAdded(accidentID, place, timeOfAccident, description)).apply();
     }
 
     public void addRoom(Rooms rooms){
         Objects.requireNonNull(rooms);
-        appendChange(new RoomAdded(rooms));
+        appendChange(new RoomAdded(rooms)).apply();
     }
 
     public void addBusinessHours(BusinessHours businessHours){
         Objects.requireNonNull(businessHours);
-        appendChange(new BusinessHoursAdded(businessHours));
+        appendChange(new BusinessHoursAdded(businessHours)).apply();
     }
 
     protected Optional<Specialist> getSpecialistById(SpecialistID specialistID){

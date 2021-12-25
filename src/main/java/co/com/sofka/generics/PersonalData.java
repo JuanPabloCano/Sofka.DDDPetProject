@@ -3,8 +3,9 @@ package co.com.sofka.generics;
 import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
+import java.util.Properties;
 
-public class PersonalData implements ValueObject<String> {
+public class PersonalData implements ValueObject<PersonalData.Properties> {
 
     private final String name;
     private final String email;
@@ -43,10 +44,25 @@ public class PersonalData implements ValueObject<String> {
             throw new IllegalArgumentException("La edad no puede ser menor o igual a cero");
         }
     }
-
     @Override
-    public String value() {
-        return name + " " + email + " " + age;
+    public Properties value(){
+        return new Properties(){
+
+            @Override
+            public String name(){
+                return name;
+            }
+
+            @Override
+            public String email(){
+                return email;
+            }
+
+            @Override
+            public Integer age(){
+                return age;
+            }
+        };
     }
 
     @Override
@@ -60,5 +76,11 @@ public class PersonalData implements ValueObject<String> {
     @Override
     public int hashCode() {
         return Objects.hash(name, email, age);
+    }
+
+    public interface Properties {
+        String name();
+        String email();
+        Integer age();
     }
 }

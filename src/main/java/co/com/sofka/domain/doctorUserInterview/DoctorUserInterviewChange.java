@@ -11,9 +11,9 @@ public class DoctorUserInterviewChange extends EventChange {
     public DoctorUserInterviewChange(DoctorUserInterview doctorUserInterview) {
 
         apply((DoctorUserInterviewCreated event) -> {
-            doctorUserInterview.doctor = event.getDoctor();
-            doctorUserInterview.user = event.getUser();
-            doctorUserInterview.room = event.getRoom();
+            doctorUserInterview.doctor.doctorID = event.getDoctorID();
+            doctorUserInterview.user.userID = event.getUserID();
+            doctorUserInterview.room.roomID = event.getRoomID();
             doctorUserInterview.dateSchedule = event.getDateSchedule();
             doctorUserInterview.businessHours = event.getBusinessHours();
         });
@@ -32,9 +32,8 @@ public class DoctorUserInterviewChange extends EventChange {
 
         apply((UserAdded event) -> {
             doctorUserInterview.user.userID = event.getUserId();
-            assert false;
             doctorUserInterview.user.personalData = event.getPersonalData();
-            doctorUserInterview.user.symptoms.forEach(Symptoms::value);
+            doctorUserInterview.user.symptoms.add(event.getSymptoms());
         });
 
         apply((UserUpdated event) -> {
@@ -43,7 +42,10 @@ public class DoctorUserInterviewChange extends EventChange {
             user.updatePersonalData(event.getPersonalData());
         });
 
-        apply((RoomAdded event) -> doctorUserInterview.room = event.getRoom());
+        apply((RoomAdded event) -> {
+            doctorUserInterview.room.roomID = event.getRoomID();
+            doctorUserInterview.room.area = event.getArea();
+        });
 
         apply((DateAdded event) -> doctorUserInterview.dateSchedule = event.getDateSchedule());
 

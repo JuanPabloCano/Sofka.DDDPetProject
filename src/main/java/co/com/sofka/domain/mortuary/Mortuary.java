@@ -29,17 +29,13 @@ public class Mortuary extends AggregateEvent<MortuaryID> {
         subscribe(new MortuaryChange(this));
     }
 
-    public Mortuary(MortuaryID mortuaryID, Corpse corpse, Coroner coroner, Embalmer embalmer,
+    public Mortuary(MortuaryID mortuaryID, CorpseID corpseID, CoronerID coronerID, EmbalmerID embalmerID,
                     BusinessHours businessHours) {
         super(mortuaryID);
-        this.corpse = corpse;
-        this.coroner = coroner;
-        this.embalmer = embalmer;
-        this.businessHours = businessHours;
-        appendChange(new MortuaryCreated(mortuaryID, corpse, coroner, embalmer, businessHours)).apply();
+        appendChange(new MortuaryCreated(mortuaryID, corpseID, coronerID, embalmerID, businessHours)).apply();
     }
 
-    public Mortuary from(MortuaryID mortuaryID, List<DomainEvent> events) {
+    public static Mortuary from(MortuaryID mortuaryID, List<DomainEvent> events) {
         var mortuary = new Mortuary(mortuaryID);
         events.forEach(mortuary::applyEvent);
         return mortuary;
@@ -87,7 +83,7 @@ public class Mortuary extends AggregateEvent<MortuaryID> {
 
     public void addBusinessHours(BusinessHours businessHours) {
         Objects.requireNonNull(businessHours);
-        appendChange(new BusinessHoursAdded(businessHours));
+        appendChange(new BusinessHoursAdded(businessHours)).apply();
     }
 
     protected Optional<Corpse> getCorpseById(CorpseID corpseID) {

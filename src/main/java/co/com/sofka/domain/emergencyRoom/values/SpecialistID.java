@@ -8,7 +8,7 @@ public class SpecialistID extends Identity {
     }
     public SpecialistID() {}
 
-    public SpecialistID of(String uuid){
+    public static SpecialistID of(String uuid){
         return new SpecialistID(uuid);
     }
 

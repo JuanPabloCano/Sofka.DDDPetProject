@@ -10,9 +10,9 @@ public class MortuaryChange extends EventChange {
     public MortuaryChange(Mortuary mortuary) {
 
         apply((MortuaryCreated event) -> {
-            mortuary.corpse = event.getCorpse();
-            mortuary.coroner = event.getCoroner();
-            mortuary.embalmer = event.getEmbalmer();
+            mortuary.corpse.corpseID = event.getCorpseID();
+            mortuary.coroner.coronerID = event.getCoronerID();
+            mortuary.embalmer.embalmerID = event.getEmbalmerID();
             mortuary.businessHours = event.getBusinessHours();
         });
 
@@ -43,7 +43,7 @@ public class MortuaryChange extends EventChange {
         apply((EmbalmerAdded event) -> {
             mortuary.embalmer.embalmerID = event.getEmbalmerID();
             mortuary.embalmer.personalData = event.getPersonalData();
-            mortuary.embalmer.techniques.forEach(Techniques::value);
+            mortuary.embalmer.techniques.add(event.getTechniques());
         });
 
         apply((EmbalmerUpdated event) -> {

@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Rooms implements ValueObject<Set<String>> {
 
-    private final Set<String> rooms;
+    private Set<String> rooms;
 
     public Rooms(Set<String> rooms) {
         this.rooms = Objects.requireNonNull(rooms, "Los cuartos son requeridos");
@@ -15,6 +15,12 @@ public class Rooms implements ValueObject<Set<String>> {
         if (this.rooms.isEmpty()){
             throw new IllegalArgumentException("Los cuartos no pueden estar vacíos");
         }
+    }
+
+    public Rooms(){}
+
+    public void addRooms(String room){
+        this.rooms.add(room);
     }
 
     @Override

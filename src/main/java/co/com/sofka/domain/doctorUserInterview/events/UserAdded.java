@@ -12,9 +12,9 @@ public class UserAdded extends DomainEvent {
 
     private final UserID userID;
     private final PersonalData personalData;
-    private final Set<Symptoms> symptoms;
+    private final Symptoms symptoms;
 
-    public UserAdded(UserID userID, PersonalData personalData, Set<Symptoms> symptoms) {
+    public UserAdded(UserID userID, PersonalData personalData, Symptoms symptoms) {
         super("sofka.doctoruserinterview.useradded");
         this.userID = Objects.requireNonNull(userID);
         this.personalData = Objects.requireNonNull(personalData);
@@ -29,7 +29,7 @@ public class UserAdded extends DomainEvent {
         return personalData;
     }
 
-    public Set<Symptoms> getSymptoms() {
+    public Symptoms getSymptoms() {
         return symptoms;
     }
 }

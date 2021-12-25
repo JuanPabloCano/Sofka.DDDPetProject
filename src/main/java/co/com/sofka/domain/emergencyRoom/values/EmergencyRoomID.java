@@ -9,7 +9,7 @@ public class EmergencyRoomID extends Identity {
     }
     public EmergencyRoomID() {}
 
-    public EmergencyRoomID of(String uuid){
+    public static EmergencyRoomID of(String uuid){
         return new EmergencyRoomID(uuid);
     }
 

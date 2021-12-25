@@ -9,7 +9,7 @@ public class PatientID extends Identity {
     }
     public PatientID() {}
 
-    public PatientID of(String uuid){
+    public static PatientID of(String uuid){
         return new PatientID(uuid);
     }
 

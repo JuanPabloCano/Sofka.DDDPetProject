@@ -13,7 +13,7 @@ public class BusinessHours implements ValueObject<String> {
     }
 
     public String value() {
-        return null;
+        return schedule;
     }
 
     @Override

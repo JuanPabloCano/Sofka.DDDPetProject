@@ -25,10 +25,11 @@ public class DoctorUserInterview extends AggregateEvent<DoctorUserInterviewID> {
         super(doctorUserInterviewID);
         subscribe(new DoctorUserInterviewChange(this));
     }
-    public DoctorUserInterview(DoctorUserInterviewID doctorUserInterviewID, Doctor doctor, User user, Room room,
+    public DoctorUserInterview(DoctorUserInterviewID doctorUserInterviewID, DoctorID doctorID, UserID userID,
+                               RoomID roomID,
                                DateSchedule dateSchedule, BusinessHours businessHours) {
         super(doctorUserInterviewID);
-        appendChange(new DoctorUserInterviewCreated(doctor, user, room, dateSchedule, businessHours)).apply();
+        appendChange(new DoctorUserInterviewCreated(doctorID, userID, roomID, dateSchedule, businessHours)).apply();
     }
 
     public static DoctorUserInterview from(DoctorUserInterviewID doctorUserInterviewID, List<DomainEvent> events){
@@ -47,11 +48,11 @@ public class DoctorUserInterview extends AggregateEvent<DoctorUserInterviewID> {
     public void updateDoctor(DoctorID doctorID, PersonalData personalData){
         Objects.requireNonNull(doctorID);
         Objects.requireNonNull(personalData);
-        appendChange(new DoctorUpdated(doctorID, personalData));
+        appendChange(new DoctorUpdated(doctorID, personalData)).apply();
 
     }
 
-    public void addUser(UserID userID, PersonalData personalData, Set<Symptoms> symptoms){
+    public void addUser(UserID userID, PersonalData personalData, Symptoms symptoms){
         Objects.requireNonNull(userID);
         Objects.requireNonNull(personalData);
         Objects.requireNonNull(symptoms);
@@ -61,22 +62,23 @@ public class DoctorUserInterview extends AggregateEvent<DoctorUserInterviewID> {
     public void updateUser(UserID userID, PersonalData personalData){
         Objects.requireNonNull(userID);
         Objects.requireNonNull(personalData);
-        appendChange(new UserUpdated(userID, personalData));
+        appendChange(new UserUpdated(userID, personalData)).apply();
     }
 
-    public void addRoom(Room room){
-        Objects.requireNonNull(room);
-        appendChange(new RoomAdded(room));
+    public void addRoom(RoomID roomID, Area area){
+        Objects.requireNonNull(roomID);
+        Objects.requireNonNull(area);
+        appendChange(new RoomAdded(roomID, area)).apply();
     }
 
     public void addDate(DateSchedule dateSchedule){
         Objects.requireNonNull(dateSchedule);
-        appendChange(new DateAdded(dateSchedule));
+        appendChange(new DateAdded(dateSchedule)).apply();
     }
 
     public void addBusinessHours(BusinessHours businessHours){
         Objects.requireNonNull(businessHours);
-        appendChange(new BusinessHoursAdded(businessHours));
+        appendChange(new BusinessHoursAdded(businessHours)).apply();
     }
 
     protected Optional<Doctor> getDoctorByID(DoctorID doctorID){
