@@ -44,18 +44,6 @@ public class PersonalData implements ValueObject<String> {
         }
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
     @Override
     public String value() {
         return name + " " + email + " " + age;
