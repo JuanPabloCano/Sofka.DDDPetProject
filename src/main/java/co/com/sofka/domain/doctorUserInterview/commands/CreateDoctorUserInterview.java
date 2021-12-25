@@ -8,6 +8,8 @@ import co.com.sofka.domain.doctorUserInterview.values.DoctorUserInterviewID;
 import co.com.sofka.domain.generic.Command;
 import co.com.sofka.generics.BusinessHours;
 
+import java.util.Objects;
+
 public class CreateDoctorUserInterview extends Command {
 
     private final DoctorUserInterviewID doctorUserInterviewID;
@@ -18,12 +20,12 @@ public class CreateDoctorUserInterview extends Command {
     private final BusinessHours businessHours;
 
     public CreateDoctorUserInterview(DoctorUserInterviewID doctorUserInterviewID, Doctor doctor, User user, Room room, DateSchedule dateSchedule, BusinessHours businessHours) {
-        this.doctorUserInterviewID = doctorUserInterviewID;
-        this.doctor = doctor;
-        this.user = user;
-        this.room = room;
-        this.dateSchedule = dateSchedule;
-        this.businessHours = businessHours;
+        this.doctorUserInterviewID = Objects.requireNonNull(doctorUserInterviewID);
+        this.doctor = Objects.requireNonNull(doctor);
+        this.user = Objects.requireNonNull(user);
+        this.room = Objects.requireNonNull(room);
+        this.dateSchedule = Objects.requireNonNull(dateSchedule);
+        this.businessHours = Objects.requireNonNull(businessHours);
     }
 
     public DoctorUserInterviewID getDoctorUserInterviewID() {

@@ -5,6 +5,8 @@ import co.com.sofka.domain.doctorUserInterview.values.DoctorUserInterviewID;
 import co.com.sofka.domain.generic.Command;
 import co.com.sofka.generics.PersonalData;
 
+import java.util.Objects;
+
 public class UpdateDoctor extends Command {
 
     private final DoctorUserInterviewID doctorUserInterviewID;
@@ -12,9 +14,9 @@ public class UpdateDoctor extends Command {
     private final PersonalData personalData;
 
     public UpdateDoctor(DoctorUserInterviewID doctorUserInterviewID, DoctorID doctorID, PersonalData personalData) {
-        this.doctorUserInterviewID = doctorUserInterviewID;
-        this.doctorID = doctorID;
-        this.personalData = personalData;
+        this.doctorUserInterviewID = Objects.requireNonNull(doctorUserInterviewID);
+        this.doctorID = Objects.requireNonNull(doctorID);
+        this.personalData = Objects.requireNonNull(personalData);
     }
 
     public DoctorUserInterviewID getDoctorUserInterviewID() {
