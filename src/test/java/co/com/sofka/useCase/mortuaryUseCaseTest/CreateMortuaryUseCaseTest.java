@@ -1,4 +1,4 @@
-package co.com.sofka.useCase;
+package co.com.sofka.useCase.mortuaryUseCaseTest;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.RequestCommand;
@@ -9,6 +9,7 @@ import co.com.sofka.domain.mortuary.values.CorpseID;
 import co.com.sofka.domain.mortuary.values.EmbalmerID;
 import co.com.sofka.domain.mortuary.values.MortuaryID;
 import co.com.sofka.generics.BusinessHours;
+import co.com.sofka.useCase.mortuaryUseCase.CreateMortuaryUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

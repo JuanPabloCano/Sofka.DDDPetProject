@@ -4,18 +4,16 @@ import co.com.sofka.domain.doctorUserInterview.values.Symptoms;
 import co.com.sofka.domain.doctorUserInterview.values.UserID;
 import co.com.sofka.domain.generic.Entity;
 import co.com.sofka.generics.PersonalData;
-
 import java.util.Objects;
-import java.util.Set;
 
 public class User extends Entity<UserID> {
 
     protected UserID userID;
     protected PersonalData personalData;
-    protected Set<Symptoms> symptoms;
+    protected Symptoms symptoms;
 
 
-    public User(UserID entityId, PersonalData personalData, Set<Symptoms> symptoms) {
+    public User(UserID entityId, PersonalData personalData, Symptoms symptoms) {
         super(entityId);
         this.personalData = Objects.requireNonNull(personalData);
         this.symptoms = Objects.requireNonNull(symptoms);
@@ -29,20 +27,11 @@ public class User extends Entity<UserID> {
         this.personalData = personalData;
     }
 
-    public void addSymptoms(Symptoms symptom){
-        if (this.symptoms.isEmpty()){
-            symptoms.add(symptom);
-        }
-        if (this.symptoms.contains(symptom)){
-            throw new IllegalArgumentException("El síntoma ya se encuentra en la lista");
-        }
-    }
-
     public PersonalData personalData() {
         return personalData;
     }
 
-    public Set<Symptoms> symptoms() {
+    public Symptoms symptoms() {
         return symptoms;
     }
 

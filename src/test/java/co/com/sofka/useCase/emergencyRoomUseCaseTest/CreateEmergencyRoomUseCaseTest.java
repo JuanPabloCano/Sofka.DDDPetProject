@@ -1,4 +1,4 @@
-package co.com.sofka.useCase;
+package co.com.sofka.useCase.emergencyRoomUseCaseTest;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.RequestCommand;
@@ -6,6 +6,7 @@ import co.com.sofka.domain.emergencyRoom.commands.CreateEmergencyRoom;
 import co.com.sofka.domain.emergencyRoom.events.EmergencyRoomCreated;
 import co.com.sofka.domain.emergencyRoom.values.*;
 import co.com.sofka.generics.BusinessHours;
+import co.com.sofka.useCase.emergencyRoomUseCase.CreateEmergencyRoomUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

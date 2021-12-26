@@ -1,4 +1,4 @@
-package co.com.sofka.useCase;
+package co.com.sofka.useCase.doctorUserInterviewUseCaseTest;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.RequestCommand;
@@ -6,6 +6,7 @@ import co.com.sofka.domain.doctorUserInterview.commands.CreateDoctorUserIntervie
 import co.com.sofka.domain.doctorUserInterview.events.DoctorUserInterviewCreated;
 import co.com.sofka.domain.doctorUserInterview.values.*;
 import co.com.sofka.generics.BusinessHours;
+import co.com.sofka.useCase.doctorUserInterviewUseCase.CreateDoctorUserInterviewUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -25,8 +25,8 @@ public class EmergencyRoomChange extends EventChange {
 
         apply((PatientAdded event) -> {
             emergencyRoom.patient.personalData = event.getPersonalData();
-            emergencyRoom.patient.consciousness.put(event.getConsciousness(), 0);
-            emergencyRoom.patient.wounds.put(event.getWounds(), "");
+            emergencyRoom.patient.consciousness.put("Motora", "2");
+            emergencyRoom.patient.wounds.put(" ", " ");
         });
 
         apply((PatientUpdated event) -> {
@@ -37,7 +37,7 @@ public class EmergencyRoomChange extends EventChange {
 
         apply((RoomAdded event) -> emergencyRoom.rooms = event.getRooms());
 
-        apply((SpecialistCreated event) -> {
+        apply((SpecialistAdded event) -> {
             emergencyRoom.specialist.specialistID = event.getSpecialistID();
             emergencyRoom.specialist.personalData = event.getPersonalData();
             emergencyRoom.specialist.specialization = event.getSpecialization();

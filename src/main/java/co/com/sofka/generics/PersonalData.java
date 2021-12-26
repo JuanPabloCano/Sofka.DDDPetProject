@@ -3,84 +3,27 @@ package co.com.sofka.generics;
 import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
-import java.util.Properties;
 
-public class PersonalData implements ValueObject<PersonalData.Properties> {
+public class PersonalData implements ValueObject<String> {
 
-    private final String name;
-    private final String email;
-    private final Integer age;
+    private final String data;
 
-    public PersonalData(String name, String email, Integer age) {
-        this.name = Objects.requireNonNull(name, "El nombre es requerido");
-        this.email = Objects.requireNonNull(email, "El email es requerido");
-        this.age = Objects.requireNonNull(age, "La edad es requerida");
-        nameValidation(name);
-        emailValidation(email);
-        ageValidation(age);
+    public PersonalData(String data) {
+        this.data = Objects.requireNonNull(data, "Los datos es requeridos");
+        nameValidation(data);
     }
 
-    private void nameValidation(String name) {
-        if (this.name.isBlank()) {
-            throw new IllegalArgumentException("El nombre no puede estar en blanco");
+    private void nameValidation(String data) {
+        if (this.data.isBlank()) {
+            throw new IllegalArgumentException("Los datos no pueden estar en blanco");
         }
-        if (this.name.length() <= 0 || this.name.length() > 100) {
-            throw new IllegalArgumentException("El tamaño nombre no puede ser igual a cero ni mayor a 100");
+        if (this.data.length() <= 0 || this.data.length() > 100) {
+            throw new IllegalArgumentException("El tamaño no puede ser igual a cero ni mayor a 100");
         }
-    }
-
-    private void emailValidation(String email) {
-        if (this.email.isBlank()) {
-            throw new IllegalArgumentException("EL email no puede estar vacío");
-        }
-        if (this.email.matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\" +
-                ".[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$")) {
-            throw new IllegalArgumentException("El email no es válido");
-        }
-    }
-
-    private void ageValidation(Integer age) {
-        if (this.age <= 0) {
-            throw new IllegalArgumentException("La edad no puede ser menor o igual a cero");
-        }
-    }
-    @Override
-    public Properties value(){
-        return new Properties(){
-
-            @Override
-            public String name(){
-                return name;
-            }
-
-            @Override
-            public String email(){
-                return email;
-            }
-
-            @Override
-            public Integer age(){
-                return age;
-            }
-        };
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PersonalData that = (PersonalData) o;
-        return Objects.equals(name, that.name) && Objects.equals(email, that.email) && Objects.equals(age, that.age);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, email, age);
-    }
-
-    public interface Properties {
-        String name();
-        String email();
-        Integer age();
+    public String value() {
+        return data;
     }
 }

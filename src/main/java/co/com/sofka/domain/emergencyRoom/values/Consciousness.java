@@ -5,11 +5,11 @@ import co.com.sofka.domain.generic.ValueObject;
 import java.util.Map;
 import java.util.Objects;
 
-public class Consciousness implements ValueObject<Map<Consciousness, Integer>> {
+public class Consciousness implements ValueObject<Map<String, String>> {
 
-    private final Map<Consciousness, Integer> glasgowScore;
+    private final Map<String, String> glasgowScore;
 
-    public Consciousness(Map<Consciousness, Integer> glasgowScore) {
+    public Consciousness(Map<String, String> glasgowScore) {
         this.glasgowScore = Objects.requireNonNull(glasgowScore, "La escala de consciencia es requerida");
         if (this.glasgowScore.isEmpty()){
             throw new IllegalArgumentException("La escala de consciencia no puede estar vacía");
@@ -17,7 +17,7 @@ public class Consciousness implements ValueObject<Map<Consciousness, Integer>> {
     }
 
     @Override
-    public Map<Consciousness, Integer> value() {
+    public Map<String, String> value() {
         return glasgowScore;
     }
 

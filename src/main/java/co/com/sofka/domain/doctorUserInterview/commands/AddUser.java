@@ -7,16 +7,15 @@ import co.com.sofka.domain.generic.Command;
 import co.com.sofka.generics.PersonalData;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class AddUser extends Command {
 
     private final DoctorUserInterviewID doctorUserInterviewID;
     private final UserID userID;
     private final PersonalData personalData;
-    private final Set<Symptoms> symptoms;
+    private final Symptoms symptoms;
 
-    public AddUser(DoctorUserInterviewID doctorUserInterviewID, UserID userID, PersonalData personalData, Set<Symptoms> symptoms) {
+    public AddUser(DoctorUserInterviewID doctorUserInterviewID, UserID userID, PersonalData personalData, Symptoms symptoms) {
         this.doctorUserInterviewID = Objects.requireNonNull(doctorUserInterviewID);
         this.userID = Objects.requireNonNull(userID);
         this.personalData = Objects.requireNonNull(personalData);
@@ -35,7 +34,7 @@ public class AddUser extends Command {
         return personalData;
     }
 
-    public Set<Symptoms> getSymptoms() {
+    public Symptoms getSymptoms() {
         return symptoms;
     }
 }

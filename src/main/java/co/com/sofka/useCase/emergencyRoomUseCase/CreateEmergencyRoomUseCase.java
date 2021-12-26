@@ -1,4 +1,4 @@
-package co.com.sofka.useCase;
+package co.com.sofka.useCase.emergencyRoomUseCase;
 
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;

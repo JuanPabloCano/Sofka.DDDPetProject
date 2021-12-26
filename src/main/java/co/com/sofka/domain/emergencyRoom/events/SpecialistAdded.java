@@ -7,13 +7,13 @@ import co.com.sofka.generics.PersonalData;
 
 import java.util.Objects;
 
-public class SpecialistCreated extends DomainEvent {
+public class SpecialistAdded extends DomainEvent {
 
     private final SpecialistID specialistID;
     private final PersonalData personalData;
     private final Specialization specialization;
 
-    public SpecialistCreated(SpecialistID specialistID, PersonalData personalData, Specialization specialization) {
+    public SpecialistAdded(SpecialistID specialistID, PersonalData personalData, Specialization specialization) {
         super("sofka.emergencyroom.specialistcreated");
         this.specialistID = Objects.requireNonNull(specialistID);
         this.personalData = Objects.requireNonNull(personalData);

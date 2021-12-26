@@ -1,4 +1,4 @@
-package co.com.sofka.useCase;
+package co.com.sofka.useCase.emergencyRoomUseCaseTest;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.RequestCommand;
@@ -9,6 +9,7 @@ import co.com.sofka.domain.emergencyRoom.values.EmergencyRoomID;
 import co.com.sofka.domain.emergencyRoom.values.Place;
 import co.com.sofka.domain.emergencyRoom.values.TimeOfAccident;
 import co.com.sofka.generics.Description;
+import co.com.sofka.useCase.emergencyRoomUseCase.AddAccidentUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ class AddAccidentUseCaseTest {
 
         //Arrange
         var emergencyRoomID = EmergencyRoomID.of("xxxx");
-        var accidentID = AccidentID.of("aaaa");
+        var accidentID = new AccidentID();
         var place = new Place("Carrera 43 # 45", "Choque automovilistico");
         var timeOfAccident = new TimeOfAccident(LocalDateTime.now());
         var description = new Description("El accidente ocurrió por un conductor en estado de embriaguez");
@@ -33,10 +34,8 @@ class AddAccidentUseCaseTest {
                 .orElseThrow(() -> new IllegalArgumentException("ERROR"));
 
         //Assert
-        AccidentAdded event = (AccidentAdded) events.getDomainEvents().get(0);
-        Assertions.assertEquals("xxxx", event.aggregateRootId());
-        Assertions.assertEquals("aaaa", event.getAccidentID().value());
-        Assertions.assertEquals("Carrera 43 # 45", event.getPlace().value());
+        AccidentAdded event = (AccidentAdded) events.getDomainEvents().get(1);
+        Assertions.assertEquals("Carrera 43 # 45"+" Choque automovilistico", event.getPlace().value());
         Assertions.assertEquals(LocalDateTime.now(), event.getTimeOfAccident().value());
         Assertions.assertEquals("El accidente ocurrió por un conductor en estado de embriaguez",
                 event.getDescription().value());

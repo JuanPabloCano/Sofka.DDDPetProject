@@ -22,39 +22,38 @@ public class EmergencyRoom extends AggregateEvent<EmergencyRoomID> {
     protected Set<Patient> patients;
 
 
-    private EmergencyRoom(EmergencyRoomID emergencyRoomID){
+    private EmergencyRoom(EmergencyRoomID emergencyRoomID) {
         super(emergencyRoomID);
         subscribe(new EmergencyRoomChange(this));
     }
 
     public EmergencyRoom(EmergencyRoomID emergencyRoomID, SpecialistID specialistID, PatientID patientID,
-                         AccidentID accidentID,
-                         Rooms rooms, BusinessHours businessHours) {
+                         AccidentID accidentID, Rooms rooms, BusinessHours businessHours) {
         super(emergencyRoomID);
         appendChange(new EmergencyRoomCreated(emergencyRoomID, specialistID, patientID, accidentID, rooms, businessHours)).apply();
     }
 
-    public static EmergencyRoom from(EmergencyRoomID emergencyRoomID, List<DomainEvent> events){
+    public static EmergencyRoom from(EmergencyRoomID emergencyRoomID, List<DomainEvent> events) {
         var emergencyRoom = new EmergencyRoom(emergencyRoomID);
         events.forEach(emergencyRoom::applyEvent);
         return emergencyRoom;
     }
 
-    public void addSpecialist(SpecialistID specialistID, PersonalData personalData, Specialization specialization){
+    public void addSpecialist(SpecialistID specialistID, PersonalData personalData, Specialization specialization) {
         Objects.requireNonNull(specialistID);
         Objects.requireNonNull(personalData);
         Objects.requireNonNull(specialization);
-        appendChange(new SpecialistCreated(specialistID, personalData, specialization)).apply();
+        appendChange(new SpecialistAdded(specialistID, personalData, specialization)).apply();
     }
 
-    public void updateSpecialist(SpecialistID specialistID, PersonalData personalData){
+    public void updateSpecialist(SpecialistID specialistID, PersonalData personalData) {
         Objects.requireNonNull(specialistID);
         Objects.requireNonNull(personalData);
         appendChange(new SpecialistUpdated(specialistID, personalData)).apply();
     }
 
     public void addPatient(PatientID patientID, PersonalData personalData, Consciousness consciousness,
-                           Wounds wounds){
+                           Wounds wounds) {
         Objects.requireNonNull(patientID);
         Objects.requireNonNull(personalData);
         Objects.requireNonNull(consciousness);
@@ -62,14 +61,14 @@ public class EmergencyRoom extends AggregateEvent<EmergencyRoomID> {
         appendChange(new PatientAdded(patientID, personalData, consciousness, wounds)).apply();
     }
 
-    public void updatePatient(PatientID patientID, PersonalData personalData){
+    public void updatePatient(PatientID patientID, PersonalData personalData) {
         Objects.requireNonNull(patientID);
         Objects.requireNonNull(personalData);
         appendChange(new PatientUpdated(patientID, personalData)).apply();
     }
 
     public void addAccident(AccidentID accidentID, Place place, TimeOfAccident timeOfAccident,
-                            Description description){
+                            Description description) {
         Objects.requireNonNull(accidentID);
         Objects.requireNonNull(place);
         Objects.requireNonNull(timeOfAccident);
@@ -77,17 +76,17 @@ public class EmergencyRoom extends AggregateEvent<EmergencyRoomID> {
         appendChange(new AccidentAdded(accidentID, place, timeOfAccident, description)).apply();
     }
 
-    public void addRoom(Rooms rooms){
+    public void addRoom(Rooms rooms) {
         Objects.requireNonNull(rooms);
         appendChange(new RoomAdded(rooms)).apply();
     }
 
-    public void addBusinessHours(BusinessHours businessHours){
+    public void addBusinessHours(BusinessHours businessHours) {
         Objects.requireNonNull(businessHours);
         appendChange(new BusinessHoursAdded(businessHours)).apply();
     }
 
-    protected Optional<Specialist> getSpecialistById(SpecialistID specialistID){
+    protected Optional<Specialist> getSpecialistById(SpecialistID specialistID) {
         return specialists.stream()
                 .filter(specialistid -> specialistid
                         .identity()
@@ -95,7 +94,7 @@ public class EmergencyRoom extends AggregateEvent<EmergencyRoomID> {
                 .findFirst();
     }
 
-    protected Optional<Patient> getPatientById(PatientID patientID){
+    protected Optional<Patient> getPatientById(PatientID patientID) {
         return patients.stream()
                 .filter(patientid -> patientid
                         .identity()

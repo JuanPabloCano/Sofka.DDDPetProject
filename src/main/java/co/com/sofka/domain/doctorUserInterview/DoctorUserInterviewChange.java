@@ -33,7 +33,7 @@ public class DoctorUserInterviewChange extends EventChange {
         apply((UserAdded event) -> {
             doctorUserInterview.user.userID = event.getUserId();
             doctorUserInterview.user.personalData = event.getPersonalData();
-            doctorUserInterview.user.symptoms.add(event.getSymptoms());
+            doctorUserInterview.user.symptoms = event.getSymptoms();
         });
 
         apply((UserUpdated event) -> {

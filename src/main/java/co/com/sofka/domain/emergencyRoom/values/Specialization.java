@@ -8,9 +8,9 @@ public class Specialization implements ValueObject<String> {
 
     private final String name;
     private final String field;
-    private final Integer duration;
+    private final String duration;
 
-    public Specialization(String name, String field, Integer duration) {
+    public Specialization(String name, String field, String duration) {
         this.name = Objects.requireNonNull(name, "El nombre es requerido");
         this.field = Objects.requireNonNull(field, "El campo es requerido");
         this.duration = Objects.requireNonNull(duration, "La duración es requerida");
@@ -27,7 +27,7 @@ public class Specialization implements ValueObject<String> {
             throw new IllegalArgumentException("No puede ser mayor a 100 caracteres");
         }
 
-        if (this.duration.equals(0)){
+        if (this.duration.length() == 0){
             throw new IllegalArgumentException("La duración no puede ser igual a cero");
         }
     }
